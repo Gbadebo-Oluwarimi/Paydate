@@ -37,7 +37,7 @@ module.exports = {
                 // updating the token 
                 user.token = token
             }else{
-                throw new ApolloError("Pleas Kindly register")
+                throw new ApolloError("Please Kindly register")
             }
         }
 
