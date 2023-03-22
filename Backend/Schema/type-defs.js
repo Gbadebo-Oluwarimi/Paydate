@@ -20,10 +20,11 @@ const typeDefs = gql`
 
     type Query {
         users:[User]
+        logout:User
     }
 
-    type mutation {
-        registerUser(registerInput:RegisterInput):User
+    type Mutation {
+        createUser(registerInput:RegisterInput):User
         LoginUser(loginInput:LoginInput):User
     }
 

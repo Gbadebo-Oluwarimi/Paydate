@@ -1,11 +1,11 @@
 const { ApolloError } = require('apollo-server');
 const User  = require('../../model/User')
-
+const bcrypt = require("bcryptjs");
 module.exports = {
     Mutation:{
         async createUser(_, {registerInput: {email, username, password}}){
             const existingUser = await User.findOne({email});
-            if(oldUser) {
+            if(existingUser) {
                 throw new ApolloError(`A User with this email ${email} already exist`)
             }
             var encryptedpassword = await bcrypt.hash(password, 10)
@@ -21,8 +21,10 @@ module.exports = {
 
             newUser.token = token
             const res = await newUser.save();
+            console.log(res)
             return {
-                id:res.id
+                id:res._id,
+                email:res.email
             }
         },
 
@@ -45,6 +47,9 @@ module.exports = {
     Query:{
         users(){
             return User.find();
+        },
+        logout(){
+
         }
     },
 }
