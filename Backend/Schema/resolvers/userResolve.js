@@ -1,9 +1,10 @@
 const { ApolloError } = require('apollo-server');
 const User  = require('../../model/User')
+const jwt = require('jsonwebtoken')
 const bcrypt = require("bcryptjs");
 module.exports = {
     Mutation:{
-        async createUser(_, {registerInput: {email, username, password}}){
+        async createUser(_, {registerInput: {email, Username, password}}){
             const existingUser = await User.findOne({email});
             if(existingUser) {
                 throw new ApolloError(`A User with this email ${email} already exist`)
@@ -11,7 +12,7 @@ module.exports = {
             var encryptedpassword = await bcrypt.hash(password, 10)
 
             const newUser = new User({
-                username,
+                username:Username,
                 email:email.toLowerCase(),
                 encrypted_password:encryptedpassword
             })
@@ -34,12 +35,17 @@ module.exports = {
             const user = await User.findOne({email})
             if(user && (await bcrypt.compare(password, user.encrypted_password))){
                 const token = jwt.sign({
-                    user_id:newUser._id,email
+                    user_id:user._id,email
                 }, "UNSAFE_STRING", { expiresIn: "2h" })
                 // updating the token 
                 user.token = token
+
+                return {
+                    id:user._id,
+                    ...user._doc
+                }
             }else{
-                throw new ApolloError("Please Kindly register")
+                throw new ApolloError("The password is not correct")
             }
         }
 
