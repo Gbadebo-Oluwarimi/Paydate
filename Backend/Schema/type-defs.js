@@ -17,6 +17,9 @@ const typeDefs = gql`
         email:String!
         password:String!
     }
+    input ForgotPassword{
+        email:String!
+    }
 
     type Query {
         users:[User]
@@ -26,6 +29,7 @@ const typeDefs = gql`
     type Mutation {
         createUser(registerInput:RegisterInput):User
         LoginUser(loginInput:LoginInput):User
+        ForgotUser(forgotPassword:ForgotPassword):User
     }
 
 `;

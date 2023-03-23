@@ -2,6 +2,7 @@ const { ApolloError } = require('apollo-server');
 const User  = require('../../model/User')
 const jwt = require('jsonwebtoken')
 const bcrypt = require("bcryptjs");
+const ForgotpasswordLinkGenerator = require('../../Functions/Forgotfunc');
 module.exports = {
     Mutation:{
         async createUser(_, {registerInput: {email, Username, password}}){
@@ -47,9 +48,24 @@ module.exports = {
             }else{
                 throw new ApolloError("The password is not correct")
             }
+        },
+
+        // Forgot Password Mutation 
+        async ForgotUser(_, {forgotPassword:{email}}){
+         // check if user email exists
+            const user = await User.findOne({email})
+            if (user){
+                const link2 = ForgotpasswordLinkGenerator(user._id, user.password, user.email);
+                console.log(link2)
+            }else{
+                throw new Error('This User Dosent exist')
+            }
         }
 
+
+
     },
+
     Query:{
         users(){
             return User.find();
