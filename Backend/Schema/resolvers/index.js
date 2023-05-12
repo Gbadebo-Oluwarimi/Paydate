@@ -1,10 +1,10 @@
-const userResolver = require('./userResolve');
+const userResolve = require('./userResolver');
 
 module.exports = {
     Query:{
-        ...userResolver.Query
+        ...userResolve.Query
     },
     Mutation:{
-        ...userResolver.Mutation
+        ...userResolve.Mutation
     }
 }
