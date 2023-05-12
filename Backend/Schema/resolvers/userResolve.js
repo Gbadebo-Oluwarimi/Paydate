@@ -1,5 +1,5 @@
 const { ApolloError } = require('apollo-server');
-const User  = require('../../model/User')
+const User  = require('../../model/User');
 const jwt = require('jsonwebtoken')
 const bcrypt = require("bcryptjs");
 const ForgotpasswordLinkGenerator = require('../../Functions/Forgotfunc');
@@ -22,8 +22,9 @@ module.exports = {
             }, "UNSAFE_STRING", { expiresIn: "2h" })
 
             newUser.token = token
-            const res = await newUser.save();
-            console.log(res)
+            const output = await newUser.save();
+            console.log(output)
+            res.cookie('toke', "gibberish", {httpOnly:true})
             return {
                 id:res._id,
                 email:res.email
@@ -67,8 +68,8 @@ module.exports = {
     },
 
     Query:{
-        users(){
-            return User.find();
+        async users() {
+            return await User.find({});
         },
         logout(){
 
