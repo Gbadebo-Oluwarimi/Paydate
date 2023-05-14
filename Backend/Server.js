@@ -4,6 +4,8 @@ const  { connectdb }  = require('./config/db');
 const { expressMiddleware } = require('@apollo/server/express4')
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer');
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const colors = require('colors')
 const dotenv = require('dotenv').config()
 const http = require('http')
@@ -11,16 +13,22 @@ const cors = require('cors')
 const { json } = require('body-parser')
 const { typeDefs } = require('./Schema/type-defs');
 const resolvers = require('./Schema/resolvers')
-
 const app = express();
 const httpServer = http.createServer(app);
+const context = require('./Context')
+app.use(cookieParser());
+app.use(session({
+  secret: 'UNSAFE_STRING',
+  resave: false,
+  saveUninitialized: true
+}));
+ 
 
 const StartServer = async () => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-    context:({ req, res }) => ({req, res})
 });
 await server.start();
 app.use(
@@ -28,7 +36,7 @@ app.use(
   cors(),
   json(),
   expressMiddleware(server, {
-    // context: async ({ req }) => (console.log(req.headers.token)),
+    context:context
   }),
 );
 

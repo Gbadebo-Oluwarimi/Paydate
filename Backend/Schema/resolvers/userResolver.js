@@ -40,7 +40,8 @@ module.exports = {
                 }, "UNSAFE_STRING", { expiresIn: "2h" })
                 // updating the token 
                 user.token = token
-
+                context.req.session.token = token; // Store token in session cookie
+                console.log(context);
                 return {
                     id:user._id,
                     ...user._doc
@@ -67,8 +68,23 @@ module.exports = {
     },
 
     Query:{
-        async users() {
-            return await User.find({});
+        async users(parent, args, context) {
+            console.log("the sjfn", context);
+            
+            // const { token } = context.req.session;
+            // console.log(token) // Retrieve token from session cookie
+            // if (!token) {
+            //   throw new Error('Authentication required');
+            // }
+            // try {
+            // //   const payload = jwt.verify(token, 'UNSAFE_STRING');
+            // //   const user = await User.find();
+            // //   return user;
+            // return await User.find();
+            // } catch (err) {
+            //   throw new Error('Authentication required');
+            // }
+            return await User.find()
         },
         logout(){
 
