@@ -1,7 +1,8 @@
-function context({req, res}) {
+async function context({req, res}) {
     return {
         isLoggedin:true,
-        stuff:true
+        stuff:true,
+        token: await req.session
     }
 }
 

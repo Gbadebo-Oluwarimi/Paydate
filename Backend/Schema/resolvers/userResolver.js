@@ -23,7 +23,6 @@ module.exports = {
             newUser.token = token
             const output = await newUser.save();
             console.log(output)
-            res.cookie('toke', "gibberish", {httpOnly:true})
             return {
                 id:res._id,
                 email:res.email
@@ -32,22 +31,22 @@ module.exports = {
 
 
 // Login Mutation
-        async LoginUser(_, {loginInput: {email, password}}){
+        async LoginUser(_, {loginInput: {email, password}}, context){
             const user = await User.findOne({email})
             if(user && (await bcrypt.compare(password, user.encrypted_password))){
-                const token = jwt.sign({
+                const newtoken = jwt.sign({
                     user_id:user._id,email
                 }, "UNSAFE_STRING", { expiresIn: "2h" })
                 // updating the token 
-                user.token = token
-                context.req.session.token = token; // Store token in session cookie
-                console.log(context);
+                user.token = newtoken
+                context.req.session.token = newtoken; // Store token in session cookie
+                console.log(context.req.session);
                 return {
                     id:user._id,
                     ...user._doc
                 }
             }else{
-                throw new ApolloError("The password is not correct")
+                throw new Error("The password is not correct")
             }
         },
 
@@ -69,22 +68,8 @@ module.exports = {
 
     Query:{
         async users(parent, args, context) {
-            console.log("the sjfn", context);
-            
-            // const { token } = context.req.session;
-            // console.log(token) // Retrieve token from session cookie
-            // if (!token) {
-            //   throw new Error('Authentication required');
-            // }
-            // try {
-            // //   const payload = jwt.verify(token, 'UNSAFE_STRING');
-            // //   const user = await User.find();
-            // //   return user;
-            // return await User.find();
-            // } catch (err) {
-            //   throw new Error('Authentication required');
-            // }
-            return await User.find()
+            console.log(context);
+            return await User.find();
         },
         logout(){
 

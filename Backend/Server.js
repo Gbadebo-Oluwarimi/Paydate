@@ -13,16 +13,21 @@ const cors = require('cors')
 const { json } = require('body-parser')
 const { typeDefs } = require('./Schema/type-defs');
 const resolvers = require('./Schema/resolvers')
+const { gettoken } = require('./Functions/getToken')
 const app = express();
 const httpServer = http.createServer(app);
 const context = require('./Context')
+ 
+
 app.use(cookieParser());
 app.use(session({
-  secret: 'UNSAFE_STRING',
+  secret: "UNSAFE_STRING",
   resave: false,
   saveUninitialized: true
 }));
- 
+
+
+
 
 const StartServer = async () => {
 const server = new ApolloServer({
@@ -44,6 +49,7 @@ await connectdb();
 await new Promise((resolve) => httpServer.listen({ port: 4000 },resolve));
 console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 }
+
 
 StartServer();
 
