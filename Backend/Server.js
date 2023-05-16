@@ -13,17 +13,17 @@ const cors = require('cors')
 const { json } = require('body-parser')
 const { typeDefs } = require('./Schema/type-defs');
 const resolvers = require('./Schema/resolvers')
-const { gettoken } = require('./Functions/getToken')
 const app = express();
 const httpServer = http.createServer(app);
 const context = require('./Context')
- 
+
 app.use(cookieParser());
 app.use(session({
   secret: "UNSAFE_STRING",
   resave: false,
   saveUninitialized: true
 }));
+
 const StartServer = async () => {
 const server = new ApolloServer({
   typeDefs,

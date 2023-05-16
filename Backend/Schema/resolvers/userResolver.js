@@ -31,14 +31,23 @@ module.exports = {
 
 
 // Login Mutation
-        async LoginUser(_, {loginInput: {email, password}}, context){
+        async LoginUser(_, {loginInput: {email, password}}, { res }){
             const user = await User.findOne({email})
             if(user && (await bcrypt.compare(password, user.encrypted_password))){
-                const newtoken = jwt.sign({
+                const accesstoken = jwt.sign({
                     user_id:user._id,email
-                }, "UNSAFE_STRING", { expiresIn: "2h" })
+                }, "UNSAFE_STRING", { expiresIn: "15m" })
+
+                const refreshtoken = jwt.sign({
+                    user_id:user._id
+                }, "UNSAFE_STRING", { expiresIn: "7d" })
+                
+
+                //saving the refresh token and access token  in a cookie 
+                res.cookie('refresh-token', refreshtoken, {expire: 60 * 60 * 24 * 7, secure:true})
+                res.cookie('access-token', accesstoken, {expire: 60 * 15})
                 // updating the token 
-                user.token = newtoken
+                user.token = accesstoken
 
                 // context.req.session.token = newtoken; // Store token in session cookie
                 // console.log(context.req.session.token);
@@ -68,12 +77,14 @@ module.exports = {
     },
 
     Query:{
-        async users(parent, args, contextValue) {
-            console.log(contextValue);
-            return await User.find();
+        async users(parent, args, context) {
+            // console.log(context);
+            const theuser = await User.findById(context.user_id)
+            return theuser
         },
-        logout(){
-
+        logout(parent, args, { res }){
+            res.clearCookie('access-token');
+            return {}
         }
     },
 }
