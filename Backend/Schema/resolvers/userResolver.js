@@ -39,8 +39,9 @@ module.exports = {
                 }, "UNSAFE_STRING", { expiresIn: "2h" })
                 // updating the token 
                 user.token = newtoken
-                context.req.session.token = newtoken; // Store token in session cookie
-                console.log(context.req.session);
+
+                // context.req.session.token = newtoken; // Store token in session cookie
+                // console.log(context.req.session.token);
                 return {
                     id:user._id,
                     ...user._doc
@@ -67,8 +68,8 @@ module.exports = {
     },
 
     Query:{
-        async users(parent, args, context) {
-            console.log(context);
+        async users(parent, args, contextValue) {
+            console.log(contextValue);
             return await User.find();
         },
         logout(){
@@ -76,4 +77,3 @@ module.exports = {
         }
     },
 }
-
