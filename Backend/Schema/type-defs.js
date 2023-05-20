@@ -19,7 +19,11 @@ const typeDefs = gql`
     input ForgotPassword{
         email:String!
     }
-
+    input createClient{
+        Clientemail:String!
+        clientmobile:String!
+        clientusername:String!
+    }
     type Query {
         users:User
         logout:User
@@ -29,6 +33,7 @@ const typeDefs = gql`
         createUser(registerInput:RegisterInput):User
         LoginUser(loginInput:LoginInput):User
         ForgotUser(forgotPassword:ForgotPassword):User
+        createCustomer(createclient:createClient):Boolean
         invalidatejwt:Boolean
     }
 
