@@ -36,16 +36,16 @@ module.exports = {
             if(user && (await bcrypt.compare(password, user.encrypted_password))){
                 const accesstoken = jwt.sign({
                     user_id:user._id,email
-                }, "UNSAFE_STRING", { expiresIn: "15m" })
+                }, "UNSAFE_STRING", { expiresIn: "5d" })
 
                 const refreshtoken = jwt.sign({
-                    user_id:user._id
+                    user_id:user._id, count:user.count
                 }, "UNSAFE_STRING", { expiresIn: "7d" })
                 
 
                 //saving the refresh token and access token  in a cookie 
                 res.cookie('refresh-token', refreshtoken, {expire: 60 * 60 * 24 * 7, secure:true})
-                res.cookie('access-token', accesstoken, {expire: 60 * 15})
+                res.cookie('access-token', accesstoken, {expire: 60 * 15, secure:true})
                 // updating the token 
                 user.token = accesstoken
 
@@ -70,6 +70,20 @@ module.exports = {
             }else{
                 throw new Error('This User Dosent exist')
             }
+        },
+
+
+        async invalidatejwt(parent, args, context){
+        
+            const theuser = await User.findById(context.user_id)
+            
+            if(theuser){
+                 theuser.count += 1
+                await theuser.save()
+                return true
+            }
+            return false
+           
         }
 
 
@@ -78,13 +92,9 @@ module.exports = {
 
     Query:{
         async users(parent, args, context) {
-            // console.log(context);
+            console.log(context);
             const theuser = await User.findById(context.user_id)
             return theuser
         },
-        logout(parent, args, { res }){
-            res.clearCookie('access-token');
-            return {}
-        }
     },
 }

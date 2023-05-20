@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema({
     },
     token:{
         type:String
+    },
+    count:{
+        type:Number,
+        default:0
     }
 
 })

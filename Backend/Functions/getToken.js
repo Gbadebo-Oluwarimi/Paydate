@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const getUser = async(token,req) => {
+const getUser = async(token) => {
     try {
       if(token){
         const user = jwt.verify(token, "UNSAFE_STRING")
@@ -7,7 +7,6 @@ const getUser = async(token,req) => {
       }
       return null
     } catch (error) {
-      console.log('An Error Occured', error)
       return error
     }
   }

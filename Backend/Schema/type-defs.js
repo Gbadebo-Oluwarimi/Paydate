@@ -29,6 +29,7 @@ const typeDefs = gql`
         createUser(registerInput:RegisterInput):User
         LoginUser(loginInput:LoginInput):User
         ForgotUser(forgotPassword:ForgotPassword):User
+        invalidatejwt:Boolean
     }
 
 `;

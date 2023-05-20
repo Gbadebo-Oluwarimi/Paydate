@@ -5,7 +5,7 @@ const { expressMiddleware } = require('@apollo/server/express4')
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
+// const session = require('express-session');
 const colors = require('colors')
 const dotenv = require('dotenv').config()
 const http = require('http')
@@ -18,12 +18,6 @@ const httpServer = http.createServer(app);
 const context = require('./Context')
 
 app.use(cookieParser());
-app.use(session({
-  secret: "UNSAFE_STRING",
-  resave: false,
-  saveUninitialized: true
-}));
-
 const StartServer = async () => {
 const server = new ApolloServer({
   typeDefs,
