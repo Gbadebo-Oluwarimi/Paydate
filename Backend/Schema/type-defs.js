@@ -19,6 +19,9 @@ const typeDefs = gql`
     input ForgotPassword{
         email:String!
     }
+    input deleteClient{
+        clientid:String!
+    }
     input createClient{
         Clientemail:String!
         clientmobile:String!
@@ -35,6 +38,7 @@ const typeDefs = gql`
         ForgotUser(forgotPassword:ForgotPassword):User
         createCustomer(createclient:createClient):Boolean
         invalidatejwt:Boolean
+        deleteCustomer(deleteClient:deleteClient):Boolean
     }
 
 `;
