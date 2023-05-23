@@ -20,12 +20,18 @@ const typeDefs = gql`
         email:String!
     }
     input deleteClient{
-        clientid:String!
+        clientid:ID!
     }
     input createClient{
         Clientemail:String!
         clientmobile:String!
         clientusername:String!
+    }
+    input CreateInvoice{
+        invoice_description:String!
+        exp_date:String!
+        start_date:String!
+        Userclient:ID!
     }
     type Query {
         users:User
@@ -36,9 +42,14 @@ const typeDefs = gql`
         createUser(registerInput:RegisterInput):User
         LoginUser(loginInput:LoginInput):User
         ForgotUser(forgotPassword:ForgotPassword):User
-        createCustomer(createclient:createClient):Boolean
         invalidatejwt:Boolean
+
+
+
+        createCustomer(createclient:createClient):Boolean
         deleteCustomer(deleteClient:deleteClient):Boolean
+        createInvoice(CreateInvoice:CreateInvoice):Boolean
+
     }
 
 `;
