@@ -7,6 +7,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 // const session = require('express-session');
 const colors = require('colors')
+const cron = require('node-cron')
 const dotenv = require('dotenv').config()
 const http = require('http')
 const cors = require('cors')
@@ -43,4 +44,11 @@ console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 
 StartServer();
 
+cron.schedule('* * * * *', () => {
+// const timestamp = Date.now();
+// const date = new Date(timestamp);
+// const dateString = date.toLocaleString(); // Convert date to a string using the browser's local timezone
 
+// console.log(dateString); // Output: "5/22/2023, 12:34:56 PM" (example format)
+  // console.log('running a task every minute');
+});

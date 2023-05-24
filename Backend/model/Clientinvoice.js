@@ -5,12 +5,12 @@ const ClientinvoiceSchema = new mongoose.Schema({
         type:String,
     },
      exp_date:{
-        type:String,
+        type:Date,
         required:true,
         unique:true
     },
     start_date:{
-        type:String,
+        type:Date,
         unique:true
     },
     UserClient:{
