@@ -1,5 +1,6 @@
 const Userclients = require('../../model/Userclients')
 const Clientinvoice = require('../../model/Clientinvoice');
+const { compareSync } = require('bcryptjs');
 module.exports = {
     Mutation:{
         async createCustomer(parent, {createclient:{Clientemail,clientmobile,clientusername}},context){
@@ -43,9 +44,43 @@ module.exports = {
         }
         return false 
       
+    },
+    async deleteInvoice(parent, {deleteinvoice:{invoiceId}}, context){
+        const invoice = await Clientinvoice.findByIdAndDelete(invoiceId)
+        if(!invoice){
+            console.log('no invoice was found');
+            return false
+        }
+        return true
+        
+    },
+    async Updateinvoice(parent, {updateinvoice:{start_date, exp_date, description, invoiceId}}, context){
+        const invoice = await Clientinvoice.findByIdAndUpdate(invoiceId, {
+            start_date,
+            exp_date,
+            invoice_description:description,
+            updated:'yes'
+        })
+        if(!invoice){
+            console.log('no invoice was found');
+            return false
+        }
+        return true
+    },
+
+    //updates the client invoice status 
+    async Updateinvoicestatus(_, {invoiceId, status}){
+        const invoice = await Clientinvoice.findByIdAndUpdate(invoiceId, {
+            status,
+            updated:'Yes'
+        })
+        if(!invoice){
+            console.log('no invoice was found');
+            return false
+        }
+        return true
     }
     },
     Query:{
-
     }
 }

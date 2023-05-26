@@ -46,20 +46,20 @@ console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 StartServer();
 
 cron.schedule('* * * * *', async() => {
-  const timestamp = Date.now();
-  const date = new Date(timestamp);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const dateString = `${year}/${month}/${day}`;
+//   const timestamp = Date.now();
+//   const date = new Date(timestamp);
+//   const year = date.getFullYear();
+//   const month = String(date.getMonth() + 1).padStart(2, '0');
+//   const day = String(date.getDate()).padStart(2, '0');
+//   const dateString = `${year}/${month}/${day}`;
 
-console.log(dateString); // Output: "5/22/2023, 12:34:56 PM" (example format)
-const invoices = await Clientinvoice.find({exp_date:dateString});
-if(invoices.length == 0){
-  console.log('no invoices to be sent today');
-}else{
-  console.log(invoices)
-}
+// console.log(dateString); // Output: "5/22/2023, 12:34:56 PM" (example format)
+// const invoices = await Clientinvoice.find({exp_date:dateString});
+// if(invoices.length == 0){
+//   console.log('no invoices to be sent today');
+// }else{
+//   console.log(invoices)
+// }
 
   // console.log('running a task every minute');
 });

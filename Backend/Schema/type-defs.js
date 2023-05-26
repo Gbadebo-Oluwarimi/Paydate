@@ -27,6 +27,15 @@ const typeDefs = gql`
         clientmobile:String!
         clientusername:String!
     }
+    input deleteinvoice{
+        invoiceId:ID!
+    }
+    input updateinvoice{
+        start_date:String!
+        exp_date:String!
+        description:String!
+        invoiceId:ID!
+    }
     input CreateInvoice{
         invoice_description:String!
         exp_date:String!
@@ -43,8 +52,9 @@ const typeDefs = gql`
         LoginUser(loginInput:LoginInput):User
         ForgotUser(forgotPassword:ForgotPassword):User
         invalidatejwt:Boolean
-
-
+        deleteInvoice(deleteinvoice:deleteinvoice):Boolean
+        Updateinvoice(updateinvoice:updateinvoice):Boolean
+        Updateinvoicestatus(invoiceId:ID!, status:String!):Boolean
 
         createCustomer(createclient:createClient):Boolean
         deleteCustomer(deleteClient:deleteClient):Boolean

@@ -18,6 +18,11 @@ const ClientinvoiceSchema = new mongoose.Schema({
         enum: ['Paid', 'Pending'],
         default: 'Pending',
     },
+    updated:{
+        type:String,
+        enum:['No', 'Yes'],
+        default:'No'
+    },
     UserClient:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Userclient',
