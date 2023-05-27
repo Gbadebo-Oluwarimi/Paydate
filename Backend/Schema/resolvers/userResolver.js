@@ -96,5 +96,9 @@ module.exports = {
             const theuser = await User.findById(context.user_id)
             return theuser
         },
+        async testing(){
+            console.log('ran')
+            return "It f****ng worked"
+        }
     },
 }

@@ -1,33 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { gql } from '@apollo/client';
+import { useEffect } from 'react';
+import { ApolloProvider, ApolloClient, useQuery, InMemoryCache} from '@apollo/client';
 import './App.css'
+// create a apollo server connection here 
+const GET_CLIENTS = gql`
+query test{
+   testing
+}
+`;
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  console.log('worked')
+  const { loading, error, data } = useQuery(GET_CLIENTS);
+console.log(data)
+  if (loading) return 'Loading';
+  if (error) return <p>Something Went Wrong</p>;
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div> 
+        <div>
+          {data.testing}
+        </div>
     </div>
   )
 }
