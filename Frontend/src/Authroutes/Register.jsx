@@ -49,15 +49,15 @@ const Register = () => {
       <div className='pb-10'>
     
 <label for="helper-text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-<input className=" outline-none ring-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="johndoe@gmail.com"/>
+<input className=" outline-none ring-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="johndoe@gmail.com" onChange={(e) => setEmail(e.target.value)} value={email}/>
 <p id="helper-text-explanation" className="mt-2 text-xs text-gray-500 dark:text-gray-400">We’ll never share your details. Read our <a href="#" class="font-medium text-blue-600 hover:underline dark:text-blue-500">Privacy Policy</a>.</p>
 
       </div>
       <div>
     
     <label for="helper-text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-    <input type="Password" className=" outline-none ring-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="*********"/>
-    <p id="helper-text-explanation" className=" mt-2 float-right font-medium text-sm text-blue-600 hover:underline dark:text-blue-500 text-xs">Forgot Password?</p>
+    <input type="Password" className=" outline-none ring-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="*********"  onChange={(e) => setPassword(e.target.value)} value={password}/>
+    <p id="helper-text-explanation" className=" mt-2 float-right font-medium  text-blue-600 hover:underline dark:text-blue-500 text-xs">Forgot Password?</p>
     
           </div>
 
@@ -67,10 +67,11 @@ const Register = () => {
       </div>
     
     <div className='m-auto text-center pt-10'>
-    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-40">Submit</button>
+    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 w-40" onClick={(e) => handleSubmit(e)}>Submit</button>
     </div>
     </div>
     </div>
+   
     </div>
   )
 }

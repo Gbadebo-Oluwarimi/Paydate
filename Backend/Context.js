@@ -6,7 +6,7 @@ const User = require('./model/User');
 async function context({req, res}) {
   if(req.body.operationName === 'test'){
     return {req, res}
-  }s
+  }
    if( req.body.operationName === 'logins' || req.body.operationName === 'createauser'){
     return {},{res,req}
    }
@@ -45,8 +45,8 @@ async function context({req, res}) {
         
 
         //saving the refresh token and access token  in a cookie 
-        res.cookie('refresh-token', newrefreshtoken, {expire: 60 * 60 * 24 * 7, secure:true})
-        res.cookie('access-token', newaccesstoken, {expire: 60 * 15, secure:true})
+        res.cookie('refresh-token', newrefreshtoken, {expire: 60 * 60 * 24 * 7, secure:true, domain:"http://localhost:5173", path:"/"})
+        res.cookie('access-token', newaccesstoken, {expire: 60 * 15, secure:true, domain:"http://localhost:5173", path:"/"})
 
         theuser.token = newaccesstoken
       }
