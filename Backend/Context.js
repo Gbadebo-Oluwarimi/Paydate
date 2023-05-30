@@ -6,7 +6,7 @@ const User = require('./model/User');
 async function context({req, res}) {
   if(req.body.operationName === 'test'){
     return {req, res}
-  }
+  }s
    if( req.body.operationName === 'logins' || req.body.operationName === 'createauser'){
     return {},{res,req}
    }
