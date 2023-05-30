@@ -1,29 +1,18 @@
-import { gql } from '@apollo/client';
-import { useEffect } from 'react';
-import { ApolloProvider, ApolloClient, useQuery, InMemoryCache} from '@apollo/client';
 import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Userpage from './Mainpage/Userpage';
+import Register from './Authroutes/Register';
 // create a apollo server connection here 
-const GET_CLIENTS = gql`
-query test{
-   testing
-}
-`;
 
 
-function App() {
-  console.log('worked')
-  const { loading, error, data } = useQuery(GET_CLIENTS);
-console.log(data)
-  if (loading) return 'Loading';
-  if (error) return <p>Something Went Wrong</p>;
-
+function App(){
   return (
-    <div> 
-        <div>
-          {data.testing}
-        </div>
-    </div>
+    <Router>
+      <Routes>
+       <Route path="/" element={<Register/>}/>
+    </Routes>
+    </Router>
   )
-}
+  }
 
 export default App
