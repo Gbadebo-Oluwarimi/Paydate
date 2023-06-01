@@ -56,14 +56,14 @@ const Register = () => {
       <div>
     
     <label for="helper-text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-    <input type="Password" className=" outline-none ring-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="*********"  onChange={(e) => setPassword(e.target.value)} value={password}/>
+    <input type="Password" className="font-poppins outline-none ring-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="*********"  onChange={(e) => setPassword(e.target.value)} value={password}/>
     <p id="helper-text-explanation" className=" mt-2 float-right font-medium  text-blue-600 hover:underline dark:text-blue-500 text-xs">Forgot Password?</p>
     
           </div>
 
       <div className='pt-8'>
-    <input type="checkbox" value="" className=" outline-none w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-    <label for="link-checkbox" className="ml-2 text-xs font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">terms and conditions</a>.</label>
+    <input type="checkbox" value="" className="font-poppins outline-none w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+    <label for="link-checkbox" className="ml-2 text-xs font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" className="text-blue-600 dark:text-blue-500 hover:underline">terms and conditions</a>.</label>
       </div>
     
     <div className='m-auto text-center pt-10'>

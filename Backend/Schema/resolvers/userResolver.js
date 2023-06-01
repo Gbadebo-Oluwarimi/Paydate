@@ -24,8 +24,9 @@ module.exports = {
             const output = await newUser.save();
             console.log(output)
             return {
-                id:res._id,
-                email:res.email
+                id:output._id,
+                email:output.email,
+                password:output.encrypted_password
             }
         },
 
