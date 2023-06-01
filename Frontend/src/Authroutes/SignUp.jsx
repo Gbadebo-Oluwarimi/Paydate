@@ -48,7 +48,7 @@ const SignUp = () => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} autoComplete='off'>
     <div className='w-full min-h-screen bg-bgcolor font-poppins'>
     <div className='text-textcolor m-auto max-w-lg indent-3.5'>
       <div className='py-10'><span className='font-semibold text-xl px-3'>Pay<span className='text-primarycolor'>Date</span></span></div>
