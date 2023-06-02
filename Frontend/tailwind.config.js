@@ -10,7 +10,8 @@ export default {
         "textcolor":"rgb(61 67 88 / 97%)",
         "primarycolor":"rgb(99, 91, 255)",
         "notification1":"rgb( 227,232,238 )",
-        "bgcolor":"rgb( 247,250,252 )"
+        "bgcolor":"rgb( 247,250,252 )",
+        "textcolor2":"#6A6A6A"
       },
       fontFamily:{
         "poppins":"poppins"
