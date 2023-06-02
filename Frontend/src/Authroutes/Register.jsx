@@ -1,9 +1,10 @@
 import React from 'react'
-import { gql } from '@apollo/client'
+import { gql, InMemoryCache } from '@apollo/client'
 import { useMutation } from '@apollo/client'
 import { useState } from 'react'
 
 
+const cache = new InMemoryCache();
 const LOGIN_USER = gql`
 mutation logins($loginInput: LoginInput){
     LoginUser(loginInput: $loginInput) {
@@ -11,7 +12,10 @@ mutation logins($loginInput: LoginInput){
     }
   }
 `
-
+const customField = {
+  __typename: 'CustomField',
+  id: '',
+};
 
 const Register = () => {
 
@@ -21,7 +25,7 @@ const Register = () => {
     const [LoginUser, { loading, error }] = useMutation(LOGIN_USER);
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        const  data  = await LoginUser({
+        const data = await LoginUser({
             variables: {
               loginInput: {
                 password,
@@ -32,6 +36,12 @@ const Register = () => {
 
          .then((data) => {
               // Handle successful response
+              customField.id = data._id
+              cache.writeQuery({
+                data: {
+                  customField,
+                },
+              });
               console.log(data);
             })
          .catch((error) => {

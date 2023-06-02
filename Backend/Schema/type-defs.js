@@ -45,7 +45,7 @@ const typeDefs = gql`
     type Query {
         users:User
         logout:User
-        testing:String
+        isAuthenticated:Boolean
     }
 
     type Mutation {

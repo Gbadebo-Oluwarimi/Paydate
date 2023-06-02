@@ -18,9 +18,14 @@ const Userpage = () => {
     if (loading) return 'Loading';
     if (error) return <p>Something Went Wrong</p>;
   return (
-    <div className='font-poppins'>
-         Hello {data.users.email}
+    <div class="container mx-auto">
+    <div class="grid grid-cols-8">
+      <div class="col-span-6">
+        // Navbar for the left section
+      </div>
+      <div class="col-span-2">Right Section</div>
     </div>
+  </div>
   )
 }
 
