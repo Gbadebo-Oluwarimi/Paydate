@@ -43,11 +43,15 @@ const Userpage = () => {
         <hr/>
         <div className='py-4'>
             <div className='m-auto max-w-3xl px-3'>
-            <div className='flex'>
+            <div className='flex align-middle justify-between'>
               <div className='text-sm'>
           <h1 className='font-semibold pb-1'>Project Management</h1>
           <h3 className='text-xs text-textcolor2 font-light'>Create and edit all you invoices right here &#x1F44C;</h3>
           
+              </div>
+              <div>
+              <button class="rounded-none text-xs bg-white border-1 border border-slate-500 px-6 py-3 mr-3">Export Database</button>
+              <button class="rounded-none text-xs bg-darkpri text-white border-1 border border-slate-500 px-6 py-3">Create Client</button>
               </div>
             </div>
             </div>
