@@ -71,7 +71,7 @@ const Userpage = () => {
     },
   ]
 
-    const { loading, error, data } = useQuery(GET_CLIENTS);
+    const { loading, error, data } = useQuery(GET_CLIENTS); // data to get the client name 
     if (loading) return 'Loading';
     if (error) return <p>Something Went Wrong</p>;
   return (
@@ -102,7 +102,7 @@ const Userpage = () => {
             <div className='m-auto max-w-3xl px-3'>
             <div className='flex align-middle justify-between'>
               <div className='text-sm'>
-          <h1 className='font-semibold pb-1'>Project Management</h1>
+          <h1 className='font-semibold pb-1'>&#x1F590; Hello {data.users.email}</h1>
           <h3 className='text-xs text-textcolor2 font-light'>Create and edit all you invoices right here &#x1F44C;</h3>
           
               </div>

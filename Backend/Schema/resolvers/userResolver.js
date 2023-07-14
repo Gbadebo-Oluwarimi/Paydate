@@ -52,6 +52,7 @@ module.exports = {
 
                 // context.req.session.token = newtoken; // Store token in session cookie
                 // console.log(context.req.session.token);
+                console.log("New session for use created")
                 return {
                     id:user._id,
                     ...user._doc
