@@ -2,18 +2,10 @@ import React from 'react'
 import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "./Maincomponent/avatar"
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./Maincomponent/table"
 import { useQuery, InMemoryCache} from '@apollo/client';
 import { gql } from '@apollo/client';
 import Createclient from './Components/Createclient';
+import Tablecomponent from './Components/tablecomponent';
 
 const GET_CLIENTS = gql`
 
@@ -74,7 +66,7 @@ const Userpage = () => {
   const updatepopup = () => {
       setpopup(!popup)
   }
-  const [popup, setpopup] = useState(true);
+  const [popup, setpopup] = useState(false);
     const { loading, error, data } = useQuery(GET_CLIENTS); // data to get the client name 
     if (loading) return 'Loading';
     if (error) return <p>Something Went Wrong</p>;
@@ -113,41 +105,14 @@ const Userpage = () => {
               </div>
               <div>
               <button class="rounded-none text-xs bg-white border-1 border border-slate-500 px-6 py-3 mr-3 focus:ring-2 focus:ring-slate-300">New Invoice</button>
-              <button class="rounded-none text-xs bg-darkpri text-white border-1 border border-slate-500 px-6 py-3 focus:ring-2 focus:ring-blue-300">Create Client</button>
+              <button class="rounded-none text-xs bg-darkpri text-white border-1 border border-slate-500 px-6 py-3 focus:ring-2 focus:ring-blue-300" onClick={updatepopup}>Create Client</button>
               </div>
             </div>
             </div>
         </div>
         <hr/>
 
-        <div className="m-auto max-w-3xl px-3 py-5">
-            <span className='text-xl font-semibold'>
-              Today's Client invoice <br/> Reminders
-            </span>
-            <Table className='mt-4'>
-      <TableCaption>A list of your recent invoices.</TableCaption>
-      <TableHeader className='bg-gray-200'>
-        <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Statuss</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className="font-medium">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-
-        </div>
-
+      <Tablecomponent invoices={invoices}/>
 
 
 
@@ -183,8 +148,8 @@ const Userpage = () => {
         </div>
         <hr/>
 
-          <div className='py-5 w-full bg-violet-400 text-white'>
-          djdj
+          <div className='py-7 w-full bg-violet-400 text-white'>
+          
 </div>
           <hr/>
 
