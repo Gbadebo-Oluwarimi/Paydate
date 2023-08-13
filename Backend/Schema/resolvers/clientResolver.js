@@ -14,8 +14,10 @@ module.exports = {
                     Clientusername:clientusername
                 })
                 await newClient.save();
+                console.log('new client created ')
                 return true
             }
+            console.log('something went wrong')
         return false
         },
     async deleteCustomer(parent, {deleteClient:{clientid}}){

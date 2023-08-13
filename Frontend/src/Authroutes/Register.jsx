@@ -33,8 +33,7 @@ const Register = () => {
               },
             },
           })
-
-         .then((data) => {
+          .then((data) => {
               // Handle successful response
               customField.id = data._id
               cache.writeQuery({

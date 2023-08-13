@@ -13,6 +13,7 @@ import {
 } from "./Maincomponent/table"
 import { useQuery, InMemoryCache} from '@apollo/client';
 import { gql } from '@apollo/client';
+import Createclient from './Components/Createclient';
 
 const GET_CLIENTS = gql`
 
@@ -70,12 +71,16 @@ const Userpage = () => {
       paymentMethod: "Credit Card",
     },
   ]
-
+  const updatepopup = () => {
+      setpopup(!popup)
+  }
+  const [popup, setpopup] = useState(true);
     const { loading, error, data } = useQuery(GET_CLIENTS); // data to get the client name 
     if (loading) return 'Loading';
     if (error) return <p>Something Went Wrong</p>;
   return (
     <div class=" font-poppins">
+      {popup && <Createclient cancelpopup={updatepopup}/>}
     <div class="flex">
       <div class="flex-grow-2 w-9/12">
         <div className='py-5'>
@@ -107,7 +112,7 @@ const Userpage = () => {
           
               </div>
               <div>
-              <button class="rounded-none text-xs bg-white border-1 border border-slate-500 px-6 py-3 mr-3 focus:ring-2 focus:ring-slate-300">Export Database</button>
+              <button class="rounded-none text-xs bg-white border-1 border border-slate-500 px-6 py-3 mr-3 focus:ring-2 focus:ring-slate-300">New Invoice</button>
               <button class="rounded-none text-xs bg-darkpri text-white border-1 border border-slate-500 px-6 py-3 focus:ring-2 focus:ring-blue-300">Create Client</button>
               </div>
             </div>
