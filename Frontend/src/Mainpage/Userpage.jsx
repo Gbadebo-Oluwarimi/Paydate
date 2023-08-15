@@ -6,6 +6,7 @@ import { useQuery, InMemoryCache} from '@apollo/client';
 import { gql } from '@apollo/client';
 import Createclient from './Components/Createclient';
 import Tablecomponent from './Components/tablecomponent';
+import Clienttable from './Components/Clienttable';
 
 const GET_CLIENTS = gql`
 
@@ -66,7 +67,16 @@ const Userpage = () => {
   const updatepopup = () => {
       setpopup(!popup)
   }
+  const updateclientpopup = () =>{
+    settablepopup(false)
+    setclientpopup(!clientpopup)
+  }
+  const updatetablepopup = () => {
+    settablepopup(!tablepopup)
+  }
   const [popup, setpopup] = useState(false);
+  const [clientpopup, setclientpopup] = useState(false)
+  const [tablepopup, settablepopup] = useState(true)
     const { loading, error, data } = useQuery(GET_CLIENTS); // data to get the client name 
     if (loading) return 'Loading';
     if (error) return <p>Something Went Wrong</p>;
@@ -86,7 +96,7 @@ const Userpage = () => {
               <div className=" w-96">
            <ul className='flex justify-between cursor-pointer'>
             <li>Home</li>
-            <li>Client</li>
+            <li onClick={updateclientpopup}>Client</li>
             <li>Client Invoice</li>
             <li>Completed</li>
             <li>Pending</li>
@@ -112,7 +122,9 @@ const Userpage = () => {
         </div>
         <hr/>
 
-      <Tablecomponent invoices={invoices}/>
+      {tablepopup && <Tablecomponent invoices={invoices}/>}
+      {clientpopup && <Clienttable/>}
+
 
 
 

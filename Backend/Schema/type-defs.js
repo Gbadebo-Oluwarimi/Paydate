@@ -7,6 +7,13 @@ const typeDefs = gql`
         email:String
         token:String
     }
+    type User_Clients {
+        id:ID!
+        Clientusername:String!
+        Clientemail:String!
+        Clientmobile:String!
+    }
+
     input RegisterInput {
         Username:String!
         email:String!
@@ -46,6 +53,7 @@ const typeDefs = gql`
         users:User
         logout:User
         isAuthenticated:Boolean
+        userclients:[User_Clients!]!
     }
 
     type Mutation {

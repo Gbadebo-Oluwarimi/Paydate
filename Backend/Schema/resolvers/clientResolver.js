@@ -84,5 +84,13 @@ module.exports = {
     }
     },
     Query:{
+        // query to get all the clients of a user
+        async userclients(parent, args, context) {
+            // console.log(context);
+            const clients = await Userclients.find({user:context.user_id})
+            // console.log(clients)
+            return clients
+
+        },
     }
 }
