@@ -64,17 +64,29 @@ const Userpage = () => {
       paymentMethod: "Credit Card",
     },
   ]
+
+  // functions to update popup states
   const updatepopup = () => {
       setpopup(!popup)
   }
   const updateclientpopup = () =>{
     settablepopup(false)
-    setclientpopup(!clientpopup)
+    setclientpopup(true)
   }
   const updatetablepopup = () => {
     settablepopup(!tablepopup)
   }
+  const updateinvoicepopup = () => {
+    setinvoicepopup(!invoicepopup)
+  }
+
+
+
+
+
+
   const [popup, setpopup] = useState(false);
+  const [invoicepopup, setinvoicepopup] = useState(false);
   const [clientpopup, setclientpopup] = useState(false)
   const [tablepopup, settablepopup] = useState(true)
     const { loading, error, data } = useQuery(GET_CLIENTS); // data to get the client name 
@@ -83,6 +95,7 @@ const Userpage = () => {
   return (
     <div class=" font-poppins">
       {popup && <Createclient cancelpopup={updatepopup}/>}
+      {invoicepopup && <Createclient cancelpopup={updateinvoicepopup}/>}
     <div class="flex">
       <div class="flex-grow-2 w-9/12">
         <div className='py-5'>
@@ -114,7 +127,7 @@ const Userpage = () => {
           
               </div>
               <div>
-              <button class="rounded-none text-xs bg-white border-1 border border-slate-500 px-6 py-3 mr-3 focus:ring-2 focus:ring-slate-300">New Invoice</button>
+              <button class="rounded-none text-xs bg-white border-1 border border-slate-500 px-6 py-3 mr-3 focus:ring-2 focus:ring-slate-300" onClick={updateinvoicepopup}>New Invoice</button>
               <button class="rounded-none text-xs bg-darkpri text-white border-1 border border-slate-500 px-6 py-3 focus:ring-2 focus:ring-blue-300" onClick={updatepopup}>Create Client</button>
               </div>
             </div>
