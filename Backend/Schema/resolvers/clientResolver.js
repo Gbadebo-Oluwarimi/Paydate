@@ -93,5 +93,12 @@ module.exports = {
             return clients
 
         },
+
+        async getAllclientinvoice(parent, args, context){
+            // console.log('ran')
+            const clientInvoice = await Clientinvoice.find({user:context.user_id})
+            // console.log(clientInvoice)
+            return clientInvoice
+        }
     }
 }

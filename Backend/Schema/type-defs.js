@@ -13,7 +13,12 @@ const typeDefs = gql`
         Clientemail:String!
         Clientmobile:String!
     }
-
+    type Clientinvoice{
+        invoice_description:String!
+        exp_date:String!
+        start_date:String!
+        status:String!
+    }
     input RegisterInput {
         Username:String!
         email:String!
@@ -54,6 +59,7 @@ const typeDefs = gql`
         logout:User
         isAuthenticated:Boolean
         userclients:[User_Clients!]!
+        getAllclientinvoice:[Clientinvoice!]!
     }
 
     type Mutation {

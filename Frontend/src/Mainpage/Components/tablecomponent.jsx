@@ -14,7 +14,7 @@ import {
 const Tablecomponent = ({invoices}) => {
 
   return (
-    <div> b
+    <div> 
      <div className="m-auto max-w-3xl px-3 py-5">
             <span className='text-xl font-semibold'>
               Today's Client invoice <br/> Reminders
