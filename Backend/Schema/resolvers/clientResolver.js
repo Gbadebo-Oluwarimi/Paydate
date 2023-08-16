@@ -41,6 +41,7 @@ module.exports = {
                 user:context.user_id,
                 invoice_description
             })
+            // console.log(invoice)
             await invoice.save();
             return true
         }

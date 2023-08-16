@@ -7,6 +7,7 @@ import { gql } from '@apollo/client';
 import Createclient from './Components/Createclient';
 import Tablecomponent from './Components/tablecomponent';
 import Clienttable from './Components/Clienttable';
+import Createinvoice from './Components/Createinvoice';
 
 const GET_CLIENTS = gql`
 
@@ -95,7 +96,7 @@ const Userpage = () => {
   return (
     <div class=" font-poppins">
       {popup && <Createclient cancelpopup={updatepopup}/>}
-      {invoicepopup && <Createclient cancelpopup={updateinvoicepopup}/>}
+      {invoicepopup && <Createinvoice cancelpopup={updateinvoicepopup}/>}
     <div class="flex">
       <div class="flex-grow-2 w-9/12">
         <div className='py-5'>
