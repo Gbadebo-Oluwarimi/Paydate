@@ -74,9 +74,9 @@ const Userpage = () => {
     settablepopup(false)
     setclientpopup(true)
   }
-  const updatetablepopup = () => {
-    settablepopup(!tablepopup)
-  }
+  // const updatetablepopup = () => {
+  //   settablepopup(!tablepopup)
+  // }
   const updateinvoicepopup = () => {
     setinvoicepopup(!invoicepopup)
   }
@@ -90,6 +90,7 @@ const Userpage = () => {
   const [invoicepopup, setinvoicepopup] = useState(false);
   const [clientpopup, setclientpopup] = useState(false)
   const [tablepopup, settablepopup] = useState(true)
+ 
     const { loading, error, data } = useQuery(GET_CLIENTS); // data to get the client name 
     if (loading) return 'Loading';
     if (error) return <p>Something Went Wrong</p>;

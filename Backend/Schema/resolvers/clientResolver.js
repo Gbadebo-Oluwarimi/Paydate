@@ -32,14 +32,16 @@ module.exports = {
     },
     async createInvoice(parent, {CreateInvoice:{invoice_description, exp_date, start_date, Userclient}}, context){
        
-        const client = Userclients.findById(Userclient)
-        if(client){
+        const clientdata = await Userclients.findById(Userclient)
+        // console.log(clientdata)
+        if(clientdata){
             const invoice = new Clientinvoice({
                 start_date,
                 exp_date,
                 UserClient:Userclient,
                 user:context.user_id,
-                invoice_description
+                invoice_description,
+                Clientname:clientdata.Clientusername
             })
             // console.log(invoice)
             await invoice.save();
@@ -96,9 +98,14 @@ module.exports = {
 
         async getAllclientinvoice(parent, args, context){
             // console.log('ran')
+            const clientdata = await Clientinvoice.find({user:context.user_id})
+           if(clientdata){
+             return clientdata
+           }
+        },
+        // query to get all the comletedinvoices 
+        async getCompletedclientinvoice(parent, args, context){
             const clientInvoice = await Clientinvoice.find({user:context.user_id})
-            // console.log(clientInvoice)
-            return clientInvoice
         }
     }
 }

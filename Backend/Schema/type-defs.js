@@ -18,6 +18,7 @@ const typeDefs = gql`
         exp_date:String!
         start_date:String!
         status:String!
+        Clientname:String
     }
     input RegisterInput {
         Username:String!
@@ -60,6 +61,7 @@ const typeDefs = gql`
         isAuthenticated:Boolean
         userclients:[User_Clients!]!
         getAllclientinvoice:[Clientinvoice!]!
+        getCompletedclientinvoice:[Clientinvoice!]!
     }
 
     type Mutation {

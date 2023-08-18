@@ -23,6 +23,10 @@ const ClientinvoiceSchema = new mongoose.Schema({
         enum:['No', 'Yes'],
         default:'No'
     },
+    Clientname:{
+        type:String,
+        
+    },
     UserClient:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Userclient',
